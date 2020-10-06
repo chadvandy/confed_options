@@ -179,22 +179,6 @@ local function main()
     end
 end
 
--- allows settings to be changed mid-game!
-core:add_listener(
-    "confed_option_changed",
-    "MctOptionSettingFinalized",
-    function(context)
-        return context:mod():get_key() == "confederation_options"
-    end,
-    function(context)
-        local option = context:option()
-        local setting = context:setting()
-
-        do_stuff(option:get_key(), setting)
-    end,
-    true
-)
-
 cm:add_first_tick_callback(function()
     -- trigger main() immediately, and re-run it on every new round
     main() 
@@ -207,6 +191,22 @@ cm:add_first_tick_callback(function()
         end,
         function(context)
             main()
+        end,
+        true
+    )
+
+    -- allows settings to be changed mid-game!
+    core:add_listener(
+        "confed_option_changed",
+        "MctOptionSettingFinalized",
+        function(context)
+            return context:mod():get_key() == "confederation_options"
+        end,
+        function(context)
+            local option = context:option()
+            local setting = context:setting()
+
+            do_stuff(option:get_key(), setting)
         end,
         true
     )
