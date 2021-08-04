@@ -30,8 +30,8 @@ local presets_section = confed_options:add_new_section("aaa_presets_section", "P
 
 local preset = confed_options:add_new_option("preset", "dropdown")
 preset:set_text("Preset Option")
-preset:set_tooltip_text("Use this preset to apply a setting to every other subculture.")
-preset:add_dropdown_value("no_preset", "No Preset", "Don't set other subcultures to anything in particular.")
+preset:set_tooltip_text("Use this preset to apply a setting to every subculture.")
+preset:add_dropdown_value("no_preset", "No Preset", "Don't trigger the preset")
 preset:add_dropdown_value("no_tweak", "No Tweak", "Set all subcultures to 'no tweak'.")
 preset:add_dropdown_value("player_only", "Player Only", "Set all subcultures to 'player only' confederation.")
 preset:add_dropdown_value("free_confed", "Free Confederation", "Set all subcultures to 'free confederation'.")
@@ -117,6 +117,8 @@ for i = 1, #options_list do
     -- add the above table as dropdown values, providing "no_tweak" as the default
     option_obj:add_dropdown_values(dropdown_options)
 end
+
+all_section:set_option_sort_function("text_sort")
 
 -- replace the old option keys (the culture ones) with the new subculture ones, keeping the settings!
 core:add_listener(
