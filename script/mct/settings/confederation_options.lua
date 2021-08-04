@@ -1,4 +1,4 @@
-local mct = mct
+local mct = get_mct()
 
 local confed_options = mct:register_mod("confederation_options")
 
@@ -25,6 +25,7 @@ local options_list = {
     "wh2_main_sc_skv_skaven",
 }
 
+--- TODO remove presets? Change how they work?
 local presets_section = confed_options:add_new_section("aaa_presets_section", "Presets")
 
 local preset = confed_options:add_new_option("preset", "dropdown")
